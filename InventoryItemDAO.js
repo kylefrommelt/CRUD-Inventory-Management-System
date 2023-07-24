@@ -26,12 +26,10 @@ class InventoryItemDAO {
     try {
       const { ID, ItemName, Quantity, Price } = item;
 
-      // Validate ID as a positive integer
       if (!Number.isInteger(ID) || ID <= 0) {
         throw new Error('ID must be a positive integer');
       }
 
-      // Validate ItemName and Price as non-empty values
       if (!ItemName || !Price) {
         throw new Error('ItemName and Price are required');
       }
@@ -40,7 +38,6 @@ class InventoryItemDAO {
         'INSERT INTO INVENTORY (ID, ItemName, Quantity, Price) VALUES (@ID, @ItemName, @Quantity, @Price)';
       const request = this.pool.request();
 
-      // Use parameterized queries to prevent SQL injection
       request.input('ID', sql.Int, ID);
       request.input('ItemName', sql.VarChar(255), ItemName);
       request.input('Quantity', sql.Int, Quantity);
@@ -56,7 +53,6 @@ class InventoryItemDAO {
 
   async read(id) {
     try {
-      // Validate ID as a positive integer
       if (!Number.isInteger(id) || id <= 0) {
         throw new Error('ID must be a positive integer');
       }
@@ -64,7 +60,6 @@ class InventoryItemDAO {
       const query = 'SELECT * FROM INVENTORY WHERE ID = @ID';
       const request = this.pool.request();
 
-      // Use parameterized queries to prevent SQL injection
       request.input('ID', sql.Int, id);
 
       const result = await request.query(query);
@@ -84,12 +79,10 @@ class InventoryItemDAO {
     try {
       const { ID, ItemName, Quantity, Price } = item;
 
-      // Validate ID as a positive integer
       if (!Number.isInteger(ID) || ID <= 0) {
         throw new Error('ID must be a positive integer');
       }
 
-      // Validate ItemName and Price as non-empty values
       if (!ItemName || !Price) {
         throw new Error('ItemName and Price are required');
       }
@@ -98,7 +91,6 @@ class InventoryItemDAO {
         'UPDATE INVENTORY SET ItemName = @ItemName, Quantity = @Quantity, Price = @Price WHERE ID = @ID';
       const request = this.pool.request();
 
-      // Use parameterized queries to prevent SQL injection
       request.input('ID', sql.Int, ID);
       request.input('ItemName', sql.VarChar(255), ItemName);
       request.input('Quantity', sql.Int, Quantity);
@@ -114,7 +106,6 @@ class InventoryItemDAO {
 
   async delete(id) {
     try {
-      // Validate ID as a positive integer
       if (!Number.isInteger(id) || id <= 0) {
         throw new Error('ID must be a positive integer');
       }
@@ -122,7 +113,6 @@ class InventoryItemDAO {
       const query = 'DELETE FROM INVENTORY WHERE ID = @ID';
       const request = this.pool.request();
 
-      // Use parameterized queries to prevent SQL injection
       request.input('ID', sql.Int, id);
 
       const result = await request.query(query);
