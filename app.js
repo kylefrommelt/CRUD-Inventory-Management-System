@@ -2,11 +2,8 @@
 
 const InventoryItemDAO = require('./InventoryItemDAO');
 
-// Example usage
-
 const inventoryDAO = new InventoryItemDAO();
 
-// Create an item
 const newItem = {
   ID: 11,
   ItemName: 'Product K',
@@ -15,10 +12,8 @@ const newItem = {
 };
 inventoryDAO.create(newItem);
 
-// Read an item
 inventoryDAO.read(5);
 
-// Update an item
 const updatedItem = {
   ID: 2,
   ItemName: 'Updated Product B',
@@ -27,5 +22,4 @@ const updatedItem = {
 };
 inventoryDAO.update(updatedItem);
 
-// Delete an item
 inventoryDAO.delete(3);
