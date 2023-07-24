@@ -90,31 +90,26 @@
       </div>
     
       <script>
-            // Function to handle form submission
             document.getElementById('addItemForm').addEventListener('submit', function (event) {
             event.preventDefault();
             
-            // Get form values
             const itemName = document.getElementById('itemName').value;
             const itemQuantity = parseInt(document.getElementById('itemQuantity').value);
             const itemPrice = parseFloat(document.getElementById('itemPrice').value);
             
-            // Create a new row for the table
             const tableBody = document.getElementById('inventoryTable').getElementsByTagName('tbody')[0];
             const newRow = tableBody.insertRow();
             
-            // Add cells to the new row with the form values
             const idCell = newRow.insertCell();
             const nameCell = newRow.insertCell();
             const quantityCell = newRow.insertCell();
             const priceCell = newRow.insertCell();
             
-            idCell.textContent = tableBody.children.length; // Set ID as the number of rows
+            idCell.textContent = tableBody.children.length;
             nameCell.textContent = itemName;
             quantityCell.textContent = itemQuantity;
             priceCell.textContent = itemPrice.toFixed(2);
             
-            // Clear the form fields after submission
             document.getElementById('itemName').value = '';
             document.getElementById('itemQuantity').value = '';
             document.getElementById('itemPrice').value = '';
