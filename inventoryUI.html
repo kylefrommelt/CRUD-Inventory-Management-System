@@ -1,0 +1,134 @@
+<!-- inventoryUI.html -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Inventory Management</title>
+        <style>
+            /* CSS styling for the page layout */
+            body {
+                font-family: Arial, sans-serif;
+            }
+
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            form {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            /* CSS styling for form elements */
+            input[type="text"], input[type="number"], input[type="submit"] {
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+            input[type="submit"] {
+                cursor: pointer;
+                background-color: #007bff;
+                color: #fff;
+            }
+
+            /* CSS styling for the table layout */
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th, td {
+                padding: 8px;
+                border: 1px solid #ccc;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            /* CSS styling for table rows on hover */
+            tr:hover {
+                background-color: #f5f5f5;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Inventory Management</h1>
+
+            <!-- Form to add a new item to the inventory -->
+            <form id="addItemForm">
+                <label for="itemName">Item Name:</label>
+                <input type="text" id="itemName" required>
+
+                <label for="itemQuantity">Quantity:</label>
+                <input type="number" id="itemQuantity" required>
+
+                <label for="itemPrice">Price:</label>
+                <input type="number" id="itemPrice" step="0.01" required>
+
+                <input type="submit" value="Add Item">
+            </form>
+        </div>
+
+        <!-- Table to display the inventory items -->
+        <h2>Inventory Items</h2>
+        <table id="inventoryTable">
+            <thead>
+                <!-- Table header -->
+                <tr>
+                    <th>ID</th>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be added dynamically using JavaScript -->
+            </tbody>
+        </table>
+
+        <script>
+            // JavaScript code to handle form submission
+            document.getElementById('addItemForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                // Get form values
+                const itemName = document.getElementById('itemName').value;
+                const itemQuantity = parseInt(document.getElementById('itemQuantity').value);
+                const itemPrice = parseFloat(document.getElementById('itemPrice').value);
+
+                // Create a new row for the table
+                const tableBody = document.getElementById('inventoryTable').getElementsByTagName('tbody')[0];
+                const newRow = tableBody.insertRow();
+
+                // Add cells to the new row with the form values
+                const idCell = newRow.insertCell();
+                const nameCell = newRow.insertCell();
+                const quantityCell = newRow.insertCell();
+                const priceCell = newRow.insertCell();
+
+                // Set ID as the number of rows (for simplicity, it assumes each row represents a unique item)
+                idCell.textContent = tableBody.children.length;
+
+                // Populate cells with the form values
+                nameCell.textContent = itemName;
+                quantityCell.textContent = itemQuantity;
+                priceCell.textContent = itemPrice.toFixed(2);
+
+                // Clear the form fields after submission
+                document.getElementById('itemName').value = '';
+                document.getElementById('itemQuantity').value = '';
+                document.getElementById('itemPrice').value = '';
+            });
+        </script>
+    </body>
+</html>
